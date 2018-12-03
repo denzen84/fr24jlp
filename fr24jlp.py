@@ -94,8 +94,8 @@ def is_valid_jet(hex, callsign):
 
 
 if __name__ == '__main__':
-    s = requests.get(addr, headers=headers)
     while True:
+        s = requests.get(addr, headers=headers)
         flights_json = json.loads(s.text)
         check_ttl()
         for x in flights_json:
