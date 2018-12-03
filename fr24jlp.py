@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 
 import requests
-import bs4
 import json
 import time
 import fnmatch
-import urllib3
-import subprocess
+# import urllib3
+# import subprocess
 
 # -----------------------Задаем параметры---------------------
 
 # Адрес fr24feed
-addr = 'http://192.168.64.128:8754/flights.json'
+#addr = 'http://192.168.64.128:8754/flights.json'
+addr = 'http://flangeneer.sknt.ru:8754/flights.json'
 
 # Выборка необходимых позывных
 mask_callsign = {
@@ -96,8 +96,7 @@ def is_valid_jet(hex, callsign):
 if __name__ == '__main__':
     s = requests.get(addr, headers=headers)
     while True:
-        fr24_answer = bs4.BeautifulSoup(s.text, "html.parser")
-        flights_json = json.loads(str(fr24_answer))
+        flights_json = json.loads(s.text)
         check_ttl()
         for x in flights_json:
             is_valid_jet(flights_json[x][0], flights_json[x][16])
